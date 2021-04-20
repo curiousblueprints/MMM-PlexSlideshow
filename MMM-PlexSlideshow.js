@@ -115,7 +115,7 @@ Module.register("MMM-PlexSlideshow", {
 		this.config.identifier = this.identifier;
 		// set no error
 		this.errorMessage = null;
-		if (this.paramsAreInvalid(this.config.plex.hostname, this.config.plex.username, this.config.plex.password)) {
+		if (this.paramsAreInvalid(this.config.plex.hostname, this.config.plex.username, this.config.plex.password, this.config.plex.apiToken)) {
 			this.errorMessage =
 				"MMM-PlexSlideshow: Missing required parameter.";
 		} else {
