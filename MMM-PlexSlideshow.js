@@ -79,6 +79,7 @@ Module.register("MMM-PlexSlideshow", {
 			port: 32400,
 			username: "",
 			password: "",
+			token: "",
 		},
 		// the speed at which to switch between images, in milliseconds
 		slideshowSpeed: 10 * 1000,
@@ -114,7 +115,7 @@ Module.register("MMM-PlexSlideshow", {
 		this.config.identifier = this.identifier;
 		// set no error
 		this.errorMessage = null;
-		if (this.config.plex.hostname.length == 0 || this.config.plex.username.length == 0 || this.config.plex.password.length == 0) {
+		if (this.paramsAreInvalid(this.config.plex.hostname, this.config.plex.username, this.config.plex.password)) {
 			this.errorMessage =
 				"MMM-PlexSlideshow: Missing required parameter.";
 		} else {
@@ -124,6 +125,18 @@ Module.register("MMM-PlexSlideshow", {
 			this.imageIndex = 0;
 			this.updateImageList();
 		}
+	},
+	paramsAreInvalid: function(hostname, username, password, token) {
+		return (
+			!hostname || !hostname.length
+		) ||
+		(
+			(!token || !token.length) &&
+			(
+				(!username || !username.length) ||
+				(!password || !password.length)
+			)
+		);
 	},
 	// Define required scripts.
 	getStyles: function () {
